@@ -20,7 +20,7 @@
 		
 		for(var i = 1; i <= totalNodes; i++) {
 			var nodeId = 'freq-node' + i;
-			setNodeStyles(nodeId, frequencyData, i*20, i);
+			setNodeStyles(nodeId, frequencyData, i*15, i);
 		}
 	}
 
@@ -30,8 +30,10 @@
 			left = 'left:' + index * 15 + 'px',
 			style = height + left;
 
-			if(freqArray[spectrum] > 100 ) {
+			if(freqArray[spectrum] > 110 ) {
 				el.className = 'freq-node blue';
+			} else if(freqArray[spectrum] > 60 ) {
+				el.className = 'freq-node green';
 			} else {
 				el.className = 'freq-node';
 			}

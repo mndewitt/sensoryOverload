@@ -5,6 +5,7 @@ Variables
 $offBlack: #252525;
 $pink: #F92672;
 $blue: #66D9EF;
+$green: #A6E22E;
 
 
 /*************
@@ -40,6 +41,10 @@ body {
 
 		&.blue {
 			border-color: $blue;
+		}
+
+		&.green {
+			border-color: $green;
 		}
 	}
 }

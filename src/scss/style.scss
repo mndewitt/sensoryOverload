@@ -29,14 +29,14 @@ body {
     	width: 100%;
     	height: 500px;
 	    position: relative;
-	    margin-left: 100px;
+	    margin-left: 50px;
     }
 
 	.freq-node {
 		position: absolute;
 		bottom: 0;
 		display: inline-block;
-		width: 15px;
+		width: 8px;
 		border-top: 2px solid $pink;
 
 		&.blue {

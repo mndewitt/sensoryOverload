@@ -12,7 +12,7 @@
 
 	function renderFrame() {
 		var freq = document.getElementById('freq'),
-			totalNodes = 50,
+			totalNodes = 150,
 			height;
 
 		requestAnimationFrame(renderFrame);
@@ -20,19 +20,19 @@
 		
 		for(var i = 1; i <= totalNodes; i++) {
 			var nodeId = 'freq-node' + i;
-			setNodeStyles(nodeId, frequencyData, i*15, i);
+			setNodeStyles(nodeId, frequencyData, i*1, i);
 		}
 	}
 
 	function setNodeStyles(el, freqArray, spectrum, index) {
 		var el = document.getElementById(el),
-			height = 'height:' + freqArray[spectrum] * 2 + 'px;',
-			left = 'left:' + index * 15 + 'px',
+			height = 'height:' + freqArray[spectrum] + 'px;',
+			left = 'left:' + index * 8 + 'px',
 			style = height + left;
 
-			if(freqArray[spectrum] > 110 ) {
+			if(freqArray[spectrum] > 140 ) {
 				el.className = 'freq-node blue';
-			} else if(freqArray[spectrum] > 60 ) {
+			} else if(freqArray[spectrum] > 70 ) {
 				el.className = 'freq-node green';
 			} else {
 				el.className = 'freq-node';

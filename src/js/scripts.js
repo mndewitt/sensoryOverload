@@ -8,6 +8,8 @@
 	audioSrc.connect(analyser);
 	audioSrc.connect(ctx.destination);
 
+	//Basic frequency chart
+
 	function renderFrame() {
 		var freq = document.getElementById('freq'),
 			totalNodes = 50,
@@ -18,19 +20,26 @@
 		
 		for(var i = 1; i <= totalNodes; i++) {
 			var nodeId = 'freq-node' + i;
-			setNodeDimensions(nodeId, frequencyData, i*20, i);
+			setNodeStyles(nodeId, frequencyData, i*20, i);
 		}
 	}
 
-	function setNodeDimensions(el, freqArray, spectrum, index) {
+	function setNodeStyles(el, freqArray, spectrum, index) {
 		var el = document.getElementById(el),
 			height = 'height:' + freqArray[spectrum] * 2 + 'px;',
 			left = 'left:' + index * 15 + 'px',
 			style = height + left;
 
+			if(freqArray[spectrum] > 100 ) {
+				el.className = 'freq-node blue';
+			} else {
+				el.className = 'freq-node';
+			}
+
 		el.setAttribute('style', style);
 	}
 
-	audio.play();
+	//Initiate the whole thing
+	audio.play(0);
 	renderFrame();
 })();

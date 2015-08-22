@@ -4,6 +4,7 @@ Variables
 
 $offBlack: #252525;
 $pink: #F92672;
+$blue: #66D9EF;
 
 
 /*************
@@ -36,5 +37,9 @@ body {
 		display: inline-block;
 		width: 15px;
 		border-top: 2px solid $pink;
+
+		&.blue {
+			border-color: $blue;
+		}
 	}
 }

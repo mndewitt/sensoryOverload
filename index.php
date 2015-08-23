@@ -7,13 +7,13 @@
 
 	<body>
 
-		<audio id="track" src="testAudio/ave.m4a"></audio>
+		<audio id="track" src="testAudio/protest.mp3"></audio>
 
 		<div class="visual-container">
 			<div class="freq-node-container">
 				<?php
 				//php cuz easy
-				for( $i = 1; $i <= 150; $i++) { ?>
+				for( $i = 1; $i <= 200; $i++) { ?>
 					<div class="freq-node" id="freq-node<?php echo $i; ?>"></div>
 				<?php } ?>
 			</div>

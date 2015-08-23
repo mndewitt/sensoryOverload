@@ -7,7 +7,7 @@
 
 	<body>
 
-		<audio id="track" src="testAudio/onemoretime.mp3"></audio>
+		<audio id="track" src="testAudio/idealistic.m4a"></audio>
 
 		<div class="visual-container">
 			<div class="freq-node-container">

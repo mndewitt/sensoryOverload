@@ -11,8 +11,7 @@
 	//Basic frequency chart
 
 	function renderFrame() {
-		var totalNodes = 200,
-			height;
+		var totalNodes = 200;
 
 		requestAnimationFrame(renderFrame);
 		analyser.getByteFrequencyData(frequencyData);

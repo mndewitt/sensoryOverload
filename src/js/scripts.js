@@ -11,8 +11,7 @@
 	//Basic frequency chart
 
 	function renderFrame() {
-		var freq = document.getElementById('freq'),
-			totalNodes = 200,
+		var totalNodes = 200,
 			height;
 
 		requestAnimationFrame(renderFrame);

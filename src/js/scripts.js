@@ -1,8 +1,29 @@
 (function() {
 
+	//Const for the number of nodes to be created/manipulated
+	var NUMBER_OF_NODES = 200;
+
 	var freqVisualizer = {
 		init: function() {
+			//Set the parent node container
+			var nodeContainer = document.getElementById('freq-node-container');
+			
+			//First, let's create the nodes we need dynamically
+			freqVisualizer.createNodes(nodeContainer);
+
+			//Then, run the visualizer
 			freqVisualizer.visualizer();
+		},
+
+		createNodes: function(parentEl) {
+			for(var i = 1; i<= NUMBER_OF_NODES; i++) {
+				var nodeChild = document.createElement('div'),
+					id = 'freq-node' + i;
+
+				nodeChild.setAttribute('class', 'freq-node');
+				nodeChild.setAttribute('id', id);
+				parentEl.appendChild(nodeChild);
+			}
 		},
 
 		visualizer: function() {
@@ -16,12 +37,10 @@
 			audioSrc.connect(ctx.destination);
 
 			function renderFrame() {
-				var totalNodes = 200;
-
 				requestAnimationFrame(renderFrame);
 				analyser.getByteFrequencyData(frequencyData);
 				
-				for(var i = 1; i <= totalNodes; i++) {
+				for(var i = 1; i <= NUMBER_OF_NODES; i++) {
 					var nodeId = 'freq-node' + i;
 					freqVisualizer.setNodeStyles(nodeId, frequencyData, i*2, i);
 				}

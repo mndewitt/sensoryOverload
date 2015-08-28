@@ -18,6 +18,7 @@ Main styles
 }
 
 body {
+	font-family: sans-serif;
 	background-color: $offBlack;
 }
 
@@ -47,5 +48,14 @@ body {
 		&.green {
 			border-color: $green;
 		}
+	}
+}
+
+//Drones
+
+.drone-container {
+	a {
+		color: $blue;
+		text-decoration: none;
 	}
 }

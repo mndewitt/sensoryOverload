@@ -12,6 +12,7 @@
 				stop = document.getElementById('stopsound'),
 				up = document.getElementById('pitchup'),
 				down = document.getElementById('pitchdown'),
+				oscType = document.getElementById('osc-type-select'),
 				isAlreadyPlaying = false,
 				noteArrayIndex = 0,
 				osc;
@@ -26,7 +27,7 @@
 
 				//We need to initiate a new oscillator ever time we start
 				osc = ctx.createOscillator();
-				osc.type = 'sine';
+				osc.type = oscType.options[oscType.selectedIndex].value;
 				osc.frequency.value = freq;
 				osc.connect(ctx.destination);
 				osc.start();
@@ -41,6 +42,10 @@
 			}
 
 			up.onclick = function() {
+				if(isAlreadyPlaying !== true) {
+					return;
+				}
+
 				freq = freq * 1.0595;
 				osc.frequency.value = freq;
 
@@ -55,6 +60,10 @@
 			}
 
 			down.onclick = function() {
+				if(isAlreadyPlaying !== true) {
+					return;
+				}
+
 				freq = freq / 1.0595;
 				osc.frequency.value = freq;
 
@@ -65,6 +74,10 @@
 				}
 
 				drone.bindCurrentNote(noteArrayIndex);
+			}
+
+			oscType.onchange = function() {
+				osc.type = oscType.options[oscType.selectedIndex].value;
 			}
 		},
 

@@ -5,8 +5,21 @@ Variables
 $offBlack: #252525;
 $pink: #F92672;
 $blue: #66D9EF;
+$darkBlue: darken($blue, 25%);
 $green: #A6E22E;
 
+/*************
+Mixins
+**************/
+
+@mixin css-gradient($from: #dfdfdf, $to: #f8f8f8) {
+	background-color: $to;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(to bottom, $from, $to);
+}
 
 /*************
 Main styles
@@ -20,6 +33,21 @@ Main styles
 body {
 	font-family: sans-serif;
 	background-color: $offBlack;
+}
+
+//Button style
+
+.btn {
+	padding: 11px 19px;
+	border: 1px solid $blue;
+	color: $blue;
+	text-decoration: none;
+	border-radius: 4px;
+
+	&:hover {
+		color: $offBlack;
+		@include css-gradient($blue, $darkBlue);
+	}
 }
 
 //Visualizer
@@ -54,13 +82,17 @@ body {
 //Drones
 
 .drone-container {
-	a {
-		color: $blue;
-		text-decoration: none;
-	}
+	margin-top: 50px;
+	margin-left: 50px;
 
 	.note-name {
 		font-size: 32px;
 		color: $pink;
+		margin-top: 100px;
+		font-size: 300px;
+	}
+
+	.btn {
+		margin-right: 20px;
 	}
 }

@@ -50,6 +50,21 @@ body {
 	}
 }
 
+//Global
+
+.title {
+	text-align: right;
+	margin-top: 20px;
+	margin-right: 20px;
+	letter-spacing: 16px;
+	text-transform: uppercase;
+	color: $pink;
+	width: 300px;
+	float: right;
+	font-weight: 100;
+	font-size: 28px;
+}
+
 //Visualizer
 
 .visual-container {
@@ -82,8 +97,9 @@ body {
 //Drones
 
 .drone-container {
-	margin-top: 50px;
-	margin-left: 50px;
+    margin-top: 25px;
+    margin-left: 50px;
+    display: inline-block;
 
 	.note-name {
 		font-size: 32px;

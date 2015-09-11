@@ -3,7 +3,6 @@
 	var voicemonitor = {
 		init: function() {
 			voicemonitor.getMicrophoneAudio();
-			voicemonitor.drawCircle();
 		},
 
 		getMicrophoneAudio: function() {

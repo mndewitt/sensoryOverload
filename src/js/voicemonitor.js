@@ -42,6 +42,9 @@
 			}
 
 			renderFrame();
+
+			//And let's run the radar circle method
+			voicemonitor.drawRadarCircle();
 		},
 
 		getAverageFrequencies: function(freqArray) {
@@ -66,10 +69,47 @@
 
 			canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 			canvasCtx.beginPath();
-			canvasCtx.arc(100, 50, radius, 0, 2*Math.PI);
+			canvasCtx.arc(300, 150, radius, 0, 2*Math.PI);
 			canvasCtx.closePath();
-			canvasCtx.fillStyle = "#66D9EF";
+			canvasCtx.fillStyle = '#66D9EF';
 			canvasCtx.fill();
+		},
+
+		drawRadarCircle: function() {
+			var mainCanvas = document.getElementById('radar-circle'),
+				canvasCtx = mainCanvas.getContext('2d'),
+				canvasWidth = mainCanvas.width,
+				canvasHeight = mainCanvas.height,
+				i = 0;
+
+			function drawRadar(radius) {
+				canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+				canvasCtx.beginPath();
+				canvasCtx.arc(300, 150, radius, 0, 2*Math.PI);
+				canvasCtx.lineWidth = 1;
+				canvasCtx.closePath();
+				canvasCtx.strokeStyle = '#66D9EF';
+				canvasCtx.stroke();
+			}
+
+			setInterval(function() {
+
+				/* Draw an ever increasing circle for the 
+				first 150 iterations.  Then, let it continue
+				to run after deleting the circle to create a pause.
+				Finally, reset the whole thing back to 0. */
+
+				if(i < 150) {
+					drawRadar(i);
+				} else if(i === 150) {
+					canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+				} else if(i === 400) {
+					i = 0;
+				}
+
+				i++;
+				
+			}, 5);
 		}
 	}
 

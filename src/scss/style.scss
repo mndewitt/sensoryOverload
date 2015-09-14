@@ -116,10 +116,13 @@ body {
 //Voice monitor
 
 .voicemonitor {
+	position: relative;
+
 	.circle {
-		width: 700px;
-		height: 350px;
-		margin-top: 150px;
-		margin-left: 150px;
+		position: absolute;
+		width: 900px;
+		height: 450px;
+		top: 50px;
+		left: 150px;
 	}
 }

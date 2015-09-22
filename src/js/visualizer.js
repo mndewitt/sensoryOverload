@@ -31,7 +31,9 @@
 				audio = document.getElementById('track'),
 				audioSrc = ctx.createMediaElementSource(audio),
 				analyser = ctx.createAnalyser(),
-				frequencyData = new Uint8Array(analyser.frequencyBinCount);
+				frequencyData = new Uint8Array(analyser.frequencyBinCount),
+				play = document.getElementById('playbtn'),
+				pause = document.getElementById('pausebtn');
 
 			audioSrc.connect(analyser);
 			audioSrc.connect(ctx.destination);
@@ -47,8 +49,15 @@
 			}
 
 			//Initiate the whole thing
-			audio.play(0);
-			renderFrame();
+			play.onclick = function() {
+				audio.play(0);
+				renderFrame();
+			}
+
+			//Stop it
+			pause.onclick = function() {
+				audio.pause();
+			}
 		},
 
 		setNodeStyles: function(el, freqArray, spectrum, index) {

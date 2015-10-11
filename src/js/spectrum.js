@@ -27,7 +27,7 @@
 
     		window.addEventListener('mouseup', function mouseUp(e) {
 
-    			//dragger.onmousemove = null;
+    			dragger.onmousemove = null;
     			osc.stop();
     			window.removeEventListener('mousemove', spectrum.mover, true);
 

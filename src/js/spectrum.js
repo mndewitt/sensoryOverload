@@ -6,18 +6,32 @@
 		},
 
 		addListeners: function(){
-    		document.getElementById('dragger').addEventListener('mousedown', spectrum.mouseDown, false);
-    		window.addEventListener('mouseup', spectrum.mouseUp, false);
-		},
+			var ctx = new AudioContext(),
+				dragger = document.getElementById('dragger'),
+				osc;
 
-		mouseDown: function(e){
-  			window.addEventListener('mousemove', spectrum.mover, true);
-  			spectrum.getMouseCoords(e);
-		},
+    		dragger.addEventListener('mousedown', function mouseDown(e) {
 
-		mouseUp: function(e) {
-			document.getElementById('dragger').onmousemove = null;
-    		window.removeEventListener('mousemove', spectrum.mover, true);
+	  			window.addEventListener('mousemove', spectrum.mover, true);
+
+	  			osc = ctx.createOscillator();
+				osc.type = 'sine';
+				osc.frequency.value = e.pageY;
+				osc.connect(ctx.destination);
+				osc.start();
+
+	  			spectrum.getMouseCoords(e, osc);
+
+    		}, false);
+
+
+    		window.addEventListener('mouseup', function mouseUp(e) {
+
+    			//dragger.onmousemove = null;
+    			osc.stop();
+    			window.removeEventListener('mousemove', spectrum.mover, true);
+
+    		}, false);
 		},
 
 		mover: function(e){
@@ -27,19 +41,13 @@
   			dragger.style.left = e.clientX - 15 + 'px';
 		},
 
-		getMouseCoords: function(e, stopSound) {
+		getMouseCoords: function(e, osc) {
 			var dragger = document.getElementById('dragger');
 
 			dragger.onmousemove = mouseMoveTrigger;
 
 			function mouseMoveTrigger(e) {
-
-				var coords = {
-					x: e.pageX,
-					y: e.pageY
-				}
-
-				console.log(coords);
+				osc.frequency.value = e.pageY;
 			}
 		}
 	}

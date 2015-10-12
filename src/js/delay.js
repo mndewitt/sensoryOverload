@@ -26,7 +26,7 @@
 
 			dragger.addEventListener('mousedown', function mouseDown(e) {
 
-			window.addEventListener('mousemove', spectrum.mover, true);
+				window.addEventListener('mousemove', spectrum.mover, true);
 
 				osc = ctx.createOscillator();
 				osc.type = 'sawtooth';

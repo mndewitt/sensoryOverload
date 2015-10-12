@@ -8,15 +8,28 @@
 		addListeners: function(){
 			var ctx = new AudioContext(),
 				dragger = document.getElementById('dragger'),
+				delay = ctx.createDelay(),
+				feedback = ctx.createGain(),
+				filter = ctx.createBiquadFilter(),
 				osc;
+
+			delay.delayTime.value = 0.4;
+			feedback.gain.value = 0.8;
+			filter.frequency.value = 4000;
+
+			filter.connect(delay);
+			delay.connect(feedback);
+			feedback.connect(filter);
+			delay.connect(ctx.destination);
 
     		dragger.addEventListener('mousedown', function mouseDown(e) {
 
 	  			window.addEventListener('mousemove', spectrum.mover, true);
 
 	  			osc = ctx.createOscillator();
-				osc.type = 'sine';
+				osc.type = 'sawtooth';
 				osc.frequency.value = e.pageY;
+				osc.connect(delay);
 				osc.connect(ctx.destination);
 				osc.start();
 

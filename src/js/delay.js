@@ -8,13 +8,15 @@
 		addListeners: function(){
 			var ctx = new AudioContext(),
 				dragger = document.getElementById('dragger'),
+				feedbackSlider = document.getElementById('feedback-slider'),
+				delaySlider = document.getElementById('delay-slider'),
 				delay = ctx.createDelay(),
 				feedback = ctx.createGain(),
 				filter = ctx.createBiquadFilter(),
 				osc;
 
 			delay.delayTime.value = 0.4;
-			feedback.gain.value = 0.8;
+			feedback.gain.value = 0.4;
 			filter.frequency.value = 4000;
 
 			filter.connect(delay);
@@ -38,13 +40,21 @@
     		}, false);
 
 
-    		window.addEventListener('mouseup', function mouseUp(e) {
+    		dragger.addEventListener('mouseup', function mouseUp(e) {
 
     			dragger.onmousemove = null;
     			osc.stop();
     			window.removeEventListener('mousemove', spectrum.mover, true);
 
     		}, false);
+
+    		feedbackSlider.onchange = function feedbackSliderChange() {
+    			feedback.gain.value = feedbackSlider.value / 100;
+    		}
+
+    		delaySlider.onchange = function delaySliderChange() {
+    			delay.delayTime.value = delaySlider.value / 100;
+    		}
 		},
 
 		mover: function(e){

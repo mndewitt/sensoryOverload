@@ -26,35 +26,34 @@
 
     		dragger.addEventListener('mousedown', function mouseDown(e) {
 
-	  			window.addEventListener('mousemove', spectrum.mover, true);
+				window.addEventListener('mousemove', spectrum.mover, true);
 
-	  			osc = ctx.createOscillator();
+				osc = ctx.createOscillator();
 				osc.type = 'sawtooth';
 				osc.frequency.value = e.pageY;
 				osc.connect(delay);
 				osc.connect(ctx.destination);
 				osc.start();
 
-	  			spectrum.getMouseCoords(e, osc);
+				spectrum.getMouseCoords(e, osc);
 
     		}, false);
 
+			dragger.addEventListener('mouseup', function mouseUp(e) {
 
-    		dragger.addEventListener('mouseup', function mouseUp(e) {
+				dragger.onmousemove = null;
+				osc.stop();
+				window.removeEventListener('mousemove', spectrum.mover, true);
 
-    			dragger.onmousemove = null;
-    			osc.stop();
-    			window.removeEventListener('mousemove', spectrum.mover, true);
+			}, false);
 
-    		}, false);
+			feedbackSlider.onchange = function feedbackSliderChange() {
+				feedback.gain.value = feedbackSlider.value / 100;
+			}
 
-    		feedbackSlider.onchange = function feedbackSliderChange() {
-    			feedback.gain.value = feedbackSlider.value / 100;
-    		}
-
-    		delaySlider.onchange = function delaySliderChange() {
-    			delay.delayTime.value = delaySlider.value / 100;
-    		}
+			delaySlider.onchange = function delaySliderChange() {
+				delay.delayTime.value = delaySlider.value / 100;
+			}
 		},
 
 		mover: function(e){
@@ -64,6 +63,7 @@
   			dragger.style.left = e.clientX - 15 + 'px';
 		},
 
+		//TODO: rename?
 		getMouseCoords: function(e, osc) {
 			var dragger = document.getElementById('dragger');
 

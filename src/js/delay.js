@@ -57,10 +57,10 @@
 		},
 
 		mover: function(e){
-    		var dragger = document.getElementById('dragger');
-  			dragger.style.position = 'absolute';
-  			dragger.style.top = e.clientY - 15 + 'px';
-  			dragger.style.left = e.clientX - 15 + 'px';
+			var dragger = document.getElementById('dragger');
+			dragger.style.position = 'absolute';
+			dragger.style.top = e.clientY - 15 + 'px';
+			dragger.style.left = e.clientX - 15 + 'px';
 		},
 
 		//TODO: rename

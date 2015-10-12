@@ -24,9 +24,9 @@
 			feedback.connect(filter);
 			delay.connect(ctx.destination);
 
-    		dragger.addEventListener('mousedown', function mouseDown(e) {
+			dragger.addEventListener('mousedown', function mouseDown(e) {
 
-				window.addEventListener('mousemove', spectrum.mover, true);
+			window.addEventListener('mousemove', spectrum.mover, true);
 
 				osc = ctx.createOscillator();
 				osc.type = 'sawtooth';
@@ -37,7 +37,7 @@
 
 				spectrum.getMouseCoords(e, osc);
 
-    		}, false);
+			}, false);
 
 			dragger.addEventListener('mouseup', function mouseUp(e) {
 
@@ -63,7 +63,7 @@
   			dragger.style.left = e.clientX - 15 + 'px';
 		},
 
-		//TODO: rename?
+		//TODO: rename
 		getMouseCoords: function(e, osc) {
 			var dragger = document.getElementById('dragger');
 

@@ -29,7 +29,7 @@
 				window.addEventListener('mousemove', spectrum.mover, true);
 
 				osc = ctx.createOscillator();
-				osc.type = 'sawtooth';
+				osc.type = 'sine';
 				osc.frequency.value = e.pageY;
 				osc.connect(delay);
 				osc.connect(ctx.destination);

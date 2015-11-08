@@ -1,15 +1,14 @@
 (function() {
 
+	var DRAGGED_ELEMENT = document.getElementById('dragger');
+
 	var spectrum = {
 		init: function() {
-			window.onload = spectrum.addListeners();
+			window.onload = spectrum.setupAudioFiltersAndEvents();
 		},
 
-		addListeners: function(){
+		setupAudioFiltersAndEvents: function(){
 			var ctx = new AudioContext(),
-				dragger = document.getElementById('dragger'),
-				feedbackSlider = document.getElementById('feedback-slider'),
-				delaySlider = document.getElementById('delay-slider'),
 				delay = ctx.createDelay(),
 				feedback = ctx.createGain(),
 				filter = ctx.createBiquadFilter(),
@@ -24,52 +23,65 @@
 			feedback.connect(filter);
 			delay.connect(ctx.destination);
 
-			dragger.addEventListener('mousedown', function mouseDown(e) {
+			spectrum.addDraggerEventListeners(ctx, delay);
+			spectrum.updateFeedbackSlider(feedback);
+			spectrum.updateDelaySlider(delay);
 
-				window.addEventListener('mousemove', spectrum.mover, true);
+		},
+
+		addDraggerEventListeners: function(ctx, delayObj) {
+
+			DRAGGED_ELEMENT.addEventListener('mousedown', function mouseDown(e) {
+
+				window.addEventListener('mousemove', spectrum.setDraggerPosition, true);
 
 				osc = ctx.createOscillator();
 				osc.type = 'sine';
 				osc.frequency.value = e.pageY;
-				osc.connect(delay);
+				osc.connect(delayObj);
 				osc.connect(ctx.destination);
 				osc.start();
 
-				spectrum.getMouseCoords(e, osc);
+				spectrum.updateFrequency(e, osc);
 
 			}, false);
 
-			dragger.addEventListener('mouseup', function mouseUp(e) {
+			DRAGGED_ELEMENT.addEventListener('mouseup', function mouseUp(e) {
 
-				dragger.onmousemove = null;
+				DRAGGED_ELEMENT.onmousemove = null;
 				osc.stop();
-				window.removeEventListener('mousemove', spectrum.mover, true);
+				window.removeEventListener('mousemove', spectrum.setDraggerPosition, true);
 
 			}, false);
+
+		},
+
+		updateFeedbackSlider: function(feedbackObj) {
+			var feedbackSlider = document.getElementById('feedback-slider');
 
 			feedbackSlider.onchange = function feedbackSliderChange() {
-				feedback.gain.value = feedbackSlider.value / 100;
+				feedbackObj.gain.value = feedbackSlider.value / 100;
 			}
+		},
+
+		updateDelaySlider: function(delayObj) {
+			var delaySlider = document.getElementById('delay-slider');
 
 			delaySlider.onchange = function delaySliderChange() {
-				delay.delayTime.value = delaySlider.value / 100;
+				delayObj.delayTime.value = delaySlider.value / 100;
 			}
 		},
 
-		mover: function(e){
-			var dragger = document.getElementById('dragger');
-			dragger.style.position = 'absolute';
-			dragger.style.top = e.clientY - 15 + 'px';
-			dragger.style.left = e.clientX - 15 + 'px';
+		setDraggerPosition: function(e){
+			DRAGGED_ELEMENT.style.position = 'absolute';
+			DRAGGED_ELEMENT.style.top = e.clientY - 15 + 'px';
+			DRAGGED_ELEMENT.style.left = e.clientX - 15 + 'px';
 		},
 
-		//TODO: rename
-		getMouseCoords: function(e, osc) {
-			var dragger = document.getElementById('dragger');
+		updateFrequency: function(e, osc) {
+			DRAGGED_ELEMENT.onmousemove = updateOscillator;
 
-			dragger.onmousemove = mouseMoveTrigger;
-
-			function mouseMoveTrigger(e) {
+			function updateOscillator(e) {
 				osc.frequency.value = e.pageY;
 			}
 		}

@@ -2,9 +2,9 @@
 
 	var DRAGGED_ELEMENT = document.getElementById('dragger');
 
-	var spectrum = {
+	var feedbackAndDelays = {
 		init: function() {
-			window.onload = spectrum.setupAudioFiltersAndEvents();
+			window.onload = feedbackAndDelays.setupAudioFiltersAndEvents();
 		},
 
 		setupAudioFiltersAndEvents: function(){
@@ -23,9 +23,9 @@
 			feedback.connect(filter);
 			delay.connect(ctx.destination);
 
-			spectrum.addDraggerEventListeners(ctx, delay);
-			spectrum.updateFeedbackSlider(feedback);
-			spectrum.updateDelaySlider(delay);
+			feedbackAndDelays.addDraggerEventListeners(ctx, delay);
+			feedbackAndDelays.updateFeedbackSlider(feedback);
+			feedbackAndDelays.updateDelaySlider(delay);
 
 		},
 
@@ -33,7 +33,7 @@
 
 			DRAGGED_ELEMENT.addEventListener('mousedown', function mouseDown(e) {
 
-				window.addEventListener('mousemove', spectrum.setDraggerPosition, true);
+				window.addEventListener('mousemove', feedbackAndDelays.setDraggerPosition, true);
 
 				osc = ctx.createOscillator();
 				osc.type = 'sine';
@@ -42,7 +42,7 @@
 				osc.connect(ctx.destination);
 				osc.start();
 
-				spectrum.updateFrequency(e, osc);
+				feedbackAndDelays.updateFrequency(e, osc);
 
 			}, false);
 
@@ -50,7 +50,7 @@
 
 				DRAGGED_ELEMENT.onmousemove = null;
 				osc.stop();
-				window.removeEventListener('mousemove', spectrum.setDraggerPosition, true);
+				window.removeEventListener('mousemove', feedbackAndDelays.setDraggerPosition, true);
 
 			}, false);
 
@@ -87,7 +87,7 @@
 		}
 	}
 
-	spectrum.init();
+	feedbackAndDelays.init();
 
 })();
 
